@@ -14,7 +14,7 @@ export function Input({ name, label, ...rest }: InputProps) {
   return (
     <FormControl>
       {!!label && (
-        <FormLabel htmlFor="password">Senha</FormLabel>
+        <FormLabel htmlFor={name}>{label}</FormLabel>
       )}
 
       <ChakraInput
