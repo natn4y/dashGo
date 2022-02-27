@@ -1,5 +1,6 @@
 import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Th, Thead, Tr, Text, useBreakpointValue } from "@chakra-ui/react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
@@ -10,6 +11,16 @@ export default function UserList() {
     base: false,
     lg: true
   })
+
+  const [showTableContent, setShowTableContent] = useState(false);
+
+  useEffect(() => {
+    if (showTableContent) {
+      setShowTableContent(true);
+    } else {
+      setShowTableContent(false);
+    }
+  }, [showTableContent]);
 
   return (
     <Box>
@@ -47,8 +58,8 @@ export default function UserList() {
                   <Checkbox colorScheme="pink" />
                 </Th>
                 <Th>Usuário</Th>
-                { isWideVersion && <Th>Data de cadastro</Th> }
-                { isWideVersion && <Th w="8">Editar</Th> }
+                { showTableContent && <Th>Data de cadastro</Th> }
+                { showTableContent && <Th w="8">Editar</Th> }
               </Tr>
             </Thead>
             <Tbody>
@@ -66,8 +77,8 @@ export default function UserList() {
                     </Text>
                   </Box>
                 </Td>
-                {isWideVersion && <Td>01 de Janeiro, 2020</Td>}
-                {isWideVersion && <Td>
+                {showTableContent && <Td>01 de Janeiro, 2020</Td>}
+                {showTableContent && <Td>
                   <Button
                     as="a"
                     size="sm"
@@ -94,8 +105,8 @@ export default function UserList() {
                     </Text>
                   </Box>
                 </Td>
-                {isWideVersion && <Td>01 de Janeiro, 2020</Td>}
-                {isWideVersion && <Td>
+                {showTableContent && <Td>01 de Janeiro, 2020</Td>}
+                {showTableContent && <Td>
                   <Button
                     as="a"
                     size="sm"
@@ -122,8 +133,8 @@ export default function UserList() {
                     </Text>
                   </Box>
                 </Td>
-                {isWideVersion && <Td>01 de Janeiro, 2020</Td>}
-                {isWideVersion && <Td>
+                {showTableContent && <Td>01 de Janeiro, 2020</Td>}
+                {showTableContent && <Td>
                   <Button
                     as="a"
                     size="sm"
