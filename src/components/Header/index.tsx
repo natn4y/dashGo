@@ -5,6 +5,7 @@ import { Logo } from "./Logo";
 import { SearchBox } from "./SearchBox";
 import { useSidebarDrawer } from "../../contexts/SidebarDrawerContext";
 import { RiMenuLine } from "react-icons/ri";
+import { useEffect, useState } from "react";
 
 export function Header() {
   const { onOpen } = useSidebarDrawer();
@@ -13,6 +14,16 @@ export function Header() {
     base: false,
     lg: true,
   })
+
+  const [showHeaderItens, setShowHeaderItens] = useState(false);
+
+  useEffect(() => {
+    if (isWideVersion) {
+      setShowHeaderItens(true);
+    } else {
+      setShowHeaderItens(false);
+    }
+  }, [isWideVersion]);
 
   return (
     <Flex
@@ -25,7 +36,7 @@ export function Header() {
       px="6"
       align="center"
     >
-      {!isWideVersion && (
+      {!showHeaderItens && (
         <IconButton
           aria-label="Open sidebar"
           icon={<Icon as={RiMenuLine} />}
@@ -39,11 +50,11 @@ export function Header() {
       )}
 
       <Logo />
-      {isWideVersion && <SearchBox />}
+      {showHeaderItens && <SearchBox />}
 
       <Flex align="center" ml="auto">
         <NotificationNav />
-        <Profile showProfileData={isWideVersion} />
+        <Profile showProfileData={showHeaderItens} />
       </Flex>
     </Flex>
   );
