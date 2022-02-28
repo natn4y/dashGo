@@ -2,6 +2,7 @@ import { Box, Button, Checkbox, Flex, Heading, Icon, Table, Tbody, Td, Th, Thead
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
+import { IoMdRefresh } from 'react-icons/io'
 import { useQuery } from 'react-query';
 
 import { Header } from "../../components/Header";
@@ -16,7 +17,7 @@ type User = {
 }
 
 export default function UserList() {
-  const { data, isLoading, error } = useQuery('users', async () => {
+  const { data, isLoading, isFetching, error, refetch } = useQuery('users', async () => {
     const response = await fetch('http://localhost:3000/api/users');
     const data = await response.json();
 
@@ -57,18 +58,29 @@ export default function UserList() {
     <Box>
       <Header />
 
-      <Flex w="100%" my="6" maxW={1480} mx="auto" px="6">
+      <Flex w="100%" my="6" maxW={1480} mx="auto" px="6" justifyContent="center">
         <Sidebar />
 
         <Box flex="1" borderRadius={8} bg="gray.800" p="8">
           <Flex
             mb="8"
-            justify="space-between"
+            justify="start"
             align="center"
           >
             <Heading size="lg" fontWeight="normal">
               Usuários
             </Heading>
+            <Button
+              onClick={() => refetch()}
+              isLoading={!isLoading && isFetching}
+              size="sm"
+              fontSize="sm"
+              marginLeft="auto"
+              marginRight="2"
+              colorScheme="twitter"
+              leftIcon={<Icon as={IoMdRefresh} fontSize="20" position="absolute" inset="0" m="auto"/>}
+            >
+            </Button>
             <Link href="/users/create" passHref>
             <Button
               as="a"
