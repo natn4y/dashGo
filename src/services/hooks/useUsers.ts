@@ -5,7 +5,7 @@ type User = {
   id: string;
   name: string;
   email: string;
-  createdAt: string;
+  created_at: string;
 };
 
 type GetUsersResponseProps = {
@@ -27,8 +27,8 @@ export async function getUsers(page: number): Promise<GetUsersResponseProps> {
       id: user.id,
       name: user.name,
       email: user.email,
-      createdAt: new Date(
-        user.createdAt
+      created_at: new Date(
+        user.created_at
       ).toLocaleDateString("pt-BR", {
         day: "2-digit",
         month: "long",

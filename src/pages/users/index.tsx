@@ -119,7 +119,7 @@ export default function UserList() {
                     </Text>
                   </Box>
                 </Td>
-                {showTableContent && <Td>{ user.createdAt }</Td>}
+                {showTableContent && <Td>{ user.created_at }</Td>}
                 {showTableContent && <Td>
                   <Button
                     as="a"
